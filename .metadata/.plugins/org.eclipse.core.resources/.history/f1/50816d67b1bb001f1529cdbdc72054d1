@@ -1,0 +1,20 @@
+package com.springboot.filmrentalstore.model;
+
+import jakarta.persistence.*;
+import java.sql.Timestamp;
+
+@Entity
+@Table(name = "language")
+public class Language {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Short languageId;
+
+    @Column(nullable = false, length = 20)
+    private String name;
+
+    @Column(name = "last_update", nullable = false)
+    private Timestamp lastUpdate;
+
+    // Getters and Setters
+}

@@ -1,0 +1,28 @@
+package com.springboot.filmrentalstore.model;
+
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+
+@Entity
+@Table(name="film")
+public class Film {
+   @Id
+   @GeneratedValue(strategy=GenerationType.IDENTITY)
+   private Short filmId;
+   
+   @Column(nullable=false, length=128)
+   private String title;
+   
+   @Column(columnDefinition="TEXT")
+   private String description;
+   
+   @Column(name="release_year")
+   private Integer releaseYear;
+   
+   @Column(name="language_id", nullable=false)
+   private Short languageId;
+   
+   // Other fields omitted for brevity
+   
+   // Getters and Setters 
+}

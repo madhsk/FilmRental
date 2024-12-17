@@ -1,0 +1,26 @@
+package com.springboot.filmrentalstore.model;
+
+import jakarta.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name="store")
+public class Store {
+  @Id
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  private short storeId;
+  
+  @ManyToOne
+  private Film film;
+  
+  @ManyToOne
+  private Store store;
+  
+  @Convert(converter = LocalDateTimeAttributeConverter.class)
+  private LocalDateTime lastUpdate;
+
+  // Other fields omitted for brevity
+  
+  // Getters and Setters 
+}

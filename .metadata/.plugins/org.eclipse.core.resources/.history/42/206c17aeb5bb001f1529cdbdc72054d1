@@ -1,0 +1,18 @@
+package com.springboot.filmrentalstore.model;
+
+import jakarta.persistence.*;
+import java.sql.Timestamp;
+
+@Entity
+@Table(name="store")
+public class Store {
+  @Id
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  private short storeId;
+  
+  
+
+  // Other fields omitted for brevity
+  
+  // Getters and Setters 
+}
