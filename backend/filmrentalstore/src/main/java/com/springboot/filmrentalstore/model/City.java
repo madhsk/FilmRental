@@ -13,14 +13,15 @@ import java.time.LocalDateTime;
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="city_id",nullable = false)
     private int cityId;
 
-    @Column(nullable = false, length = 50)
+    @Column(name="city",nullable = false, length = 50)
     private String city;
 
     @ManyToOne
     @JoinColumn(name = "country_id", nullable = false)
-    private Country country; // Correct relationship
+    private Country country;
 
     @Column(name = "last_update", nullable = false)
     @Convert(converter = LocalDateTimeAttributeConverter.class)

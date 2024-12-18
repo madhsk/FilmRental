@@ -14,12 +14,13 @@ import java.time.LocalDateTime;
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="film_id")
     private int filmId;
 
-    @Column(nullable = false, length = 128)
+    @Column(name="title",nullable = false, length = 128)
     private String title;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name="description",columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "release_year")
@@ -45,7 +46,9 @@ public class Film {
     @Column(name = "replacement_cost", precision = 5, scale = 2)
     private BigDecimal replacementCost;
 
+    @Column(name = "rating")
     private String rating;
+    @Column(name = "special_features")
     private String specialFeatures;
 
     @Column(name = "last_update", nullable = false)

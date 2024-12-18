@@ -6,31 +6,32 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "film_category")
 @Data
 @NoArgsConstructor
-@IdClass(FilmCategoryId.class)
 public class FilmCategory {
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "film_id", nullable = false)
-    private Film film;
-
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
-
+	@EmbeddedId
+	private FilmCategoryId filmcategoryId;
+	
     @Column(name = "last_update", nullable = false)
     @Convert(converter = LocalDateTimeAttributeConverter.class)
     private LocalDateTime lastUpdate;
 }
 
-// Composite key class
-@Data
-@NoArgsConstructor
-class FilmCategoryId implements java.io.Serializable {
-    private int film;
-    private int category;
+
+@Embeddable
+class FilmCategoryId {
+	@ManyToOne
+	@JsonBackReference
+	@JoinColumn(name = "film_id", referencedColumnName = "film_id", nullable = false)
+	private Film film;
+	
+	@ManyToOne
+	@JsonBackReference
+	@JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
+	private Category category;
+
 }

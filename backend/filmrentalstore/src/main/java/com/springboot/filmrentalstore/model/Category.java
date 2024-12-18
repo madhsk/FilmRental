@@ -13,9 +13,10 @@ import java.time.LocalDateTime;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="category_id",nullable = false)
     private int categoryId;
 
-    @Column(nullable = false, length = 25)
+    @Column(name="name",nullable = false, length = 25)
     private String name;
 
     @Column(name = "last_update", nullable = false)

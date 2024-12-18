@@ -14,9 +14,10 @@ import java.util.Date;
 public class Rental {
    @Id
    @GeneratedValue(strategy=GenerationType.IDENTITY)
+   @Column(name = "rental_id")
    private int rentalId;
    
-   @Column(nullable=false)
+   @Column(name="rental_date",nullable=false)
    private Date rentalDate;
    
    @ManyToOne
@@ -38,5 +39,4 @@ public class Rental {
    @Convert(converter = LocalDateTimeAttributeConverter.class)
    private LocalDateTime lastUpdate;
    
-   // Getters and Setters 
 }

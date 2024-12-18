@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "store_id")
     private int storeId;
 
     @ManyToOne
@@ -20,7 +21,7 @@ public class Store {
     private Staff staff;
 
     @ManyToOne
-    @JoinColumn(name = "address_id", nullable = false)
+    @JoinColumn(name = "addres_id", nullable = false)
     private Address address;
 
     @Column(name = "last_update", nullable = false)

@@ -8,8 +8,5 @@ import org.springframework.stereotype.Repository;
 import com.springboot.filmrentalstore.model.*;
 @Repository
 public interface ActorDAO extends JpaRepository<Actor,Integer>{
-	public List<Actor> getActorByLastName(String lastname);
-	public List<Actor> getActorByFirstName(String firstname);
-	public List<Film> getFilmByActorId(int actorId);
-	public List<FilmActor> getTopTenActorsByFilmCount(); 
+	
 }

@@ -13,9 +13,10 @@ import java.time.LocalDateTime;
 public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "language_id", precision = 5, scale = 2)
     private int languageId;
 
-    @Column(nullable = false, length = 20)
+    @Column(name="name",nullable = false, length = 20)
     private String name;
 
     @Column(name = "last_update", nullable = false)

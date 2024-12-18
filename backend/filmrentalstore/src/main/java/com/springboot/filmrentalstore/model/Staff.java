@@ -13,12 +13,13 @@ import java.time.LocalDateTime;
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "staff_id")
     private int staffId;
 
-    @Column(nullable = false, length = 45)
+    @Column(name="first_name",nullable = false, length = 45)
     private String firstName;
 
-    @Column(nullable = false, length = 45)
+    @Column(name="last_name",nullable = false, length = 45)
     private String lastName;
 
     @ManyToOne
@@ -26,16 +27,21 @@ public class Staff {
     private Address address;
 
     @Lob
+    @Column(name = "picture")
     private byte[] picture;
 
+    @Column(name = "email")
     private String email;
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
-    private Store store; // Correct relationship
-
+    private Store store;
+    
+    @Column(name = "active")
     private int active;
+    @Column(name = "username")
     private String username;
+    @Column(name = "password")
     private String password;
 
     @Column(name = "last_update", nullable = false)

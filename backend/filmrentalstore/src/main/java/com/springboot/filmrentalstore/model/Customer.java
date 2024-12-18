@@ -14,25 +14,26 @@ import java.util.Date;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="customer_id",nullable = false)
     private int customerId;
 
     @Column(name = "store_id", nullable = false)
     private int storeId;
 
-    @Column(nullable = false, length = 45)
+    @Column(name="first_name", nullable = false, length = 45)
     private String firstName;
 
-    @Column(nullable = false, length = 45)
+    @Column(name="last_name",nullable = false, length = 45)
     private String lastName;
 
-    @Column(length = 50)
+    @Column(name="email",length = 50)
     private String email;
 
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = false)
-    private Address address; // Correct relationship
+    private Address address; 
 
-    @Column(nullable = false)
+    @Column(name="active",nullable = false)
     private Boolean active;
 
     @Column(name = "create_date", nullable = false)

@@ -15,6 +15,7 @@ import java.util.Date;
 public class Payment {
    @Id
    @GeneratedValue(strategy=GenerationType.IDENTITY)
+   @Column(name = "payment_id")
    private int paymentId;
    
    @ManyToOne
@@ -29,7 +30,7 @@ public class Payment {
    @JoinColumn(name="rental_id")
    private Rental rental;
    
-   @Column(nullable=false, precision=5, scale=2)
+   @Column(name="amount",nullable=false, precision=5, scale=2)
    private BigDecimal amount;
    
    @Column(name="payment_date", nullable=false)
