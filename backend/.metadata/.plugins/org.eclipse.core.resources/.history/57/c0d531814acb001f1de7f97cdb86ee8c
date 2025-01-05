@@ -26,6 +26,7 @@ public class City {
 	private String cityName;
 
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "country_id", nullable = false)
 	private Country country;
 

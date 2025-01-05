@@ -25,20 +25,20 @@ public class Store {
 
     @ManyToOne
     @JoinColumn(name = "address_id")
-    @JsonIgnore
+    @JsonManagedReference 
     private Address address;
 
     @ManyToOne
     @JoinColumn(name = "staff_id")
-    @JsonIgnore // Handle bidirectional relationships
+    @JsonManagedReference // Handle bidirectional relationships
     private Staff manager;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore // Handle bidirectional relationships
+    @JsonBackReference // Handle bidirectional relationships
     private List<Staff> staffList;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @JsonBackReference
     private List<Customer> customers;
 
     private LocalDateTime lastUpdate;

@@ -22,10 +22,12 @@ public class Inventory {
 
 	@ManyToOne
 	@JoinColumn(name = "film_id")
+	@JsonIgnore
 	private Film film;
 
 	@ManyToOne
 	@JoinColumn(name = "store_id")
+	@JsonIgnore
 	private Store store;
 
 	private LocalDateTime lastUpdate;

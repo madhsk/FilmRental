@@ -32,6 +32,7 @@ public class Address {
 	private String district;
 
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "city_id")
 	private City city;
 

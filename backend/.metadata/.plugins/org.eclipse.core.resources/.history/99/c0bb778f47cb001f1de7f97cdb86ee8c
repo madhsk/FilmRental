@@ -3,10 +3,7 @@ package com.springboot.filmrentalstore.model;
 import java.time.LocalDateTime;
 
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,21 +23,18 @@ public class Address {
 	private Long addressId;
 
 	private String address;
-
 	private String address2;
-
 	private String district;
 
 	@ManyToOne
+//	@JsonManagedReference
 	@JoinColumn(name = "city_id")
 	private City city;
 
 	private String postalCode;
-
 	private String phone;
-
 	private LocalDateTime lastUpdate;
-
+	
 	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Store> stores;

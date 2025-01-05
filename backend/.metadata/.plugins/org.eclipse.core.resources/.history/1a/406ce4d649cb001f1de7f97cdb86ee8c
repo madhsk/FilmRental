@@ -25,7 +25,7 @@ public class Store {
 
     @ManyToOne
     @JoinColumn(name = "address_id")
-    @JsonIgnore
+    @JsonManagedReference
     private Address address;
 
     @ManyToOne

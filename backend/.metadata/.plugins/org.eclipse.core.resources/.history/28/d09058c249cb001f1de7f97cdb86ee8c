@@ -33,7 +33,7 @@ public class Staff {
 
     @ManyToOne
     @JoinColumn(name = "store_id")
-    @JsonIgnore // Handle bidirectional relationships
+    @JsonBackReference // Handle bidirectional relationships
     private Store store;
 
     private String username;
