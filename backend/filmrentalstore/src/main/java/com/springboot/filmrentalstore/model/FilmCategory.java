@@ -1,37 +1,66 @@
 package com.springboot.filmrentalstore.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
-@Table(name = "film_category")
-@Data
-@NoArgsConstructor
+@IdClass(FilmCategoryId.class)
 public class FilmCategory {
-	@EmbeddedId
-	private FilmCategoryId filmcategoryId;
-	
-    @Column(name = "last_update", nullable = false)
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    private LocalDateTime lastUpdate;
-}
 
-
-@Embeddable
-class FilmCategoryId {
+	@Id
 	@ManyToOne
-	@JsonBackReference
-	@JoinColumn(name = "film_id", referencedColumnName = "film_id", nullable = false)
+	@JoinColumn(name = "film_id")
+	@JsonIgnore
 	private Film film;
-	
+
+	@Id
 	@ManyToOne
-	@JsonBackReference
-	@JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
+	@JoinColumn(name = "category_id")
+	@JsonIgnore
 	private Category category;
+
+	private LocalDateTime lastUpdate;
+
+	public FilmCategory() {
+		super();
+	}
+
+	public FilmCategory(Film film, Category category, LocalDateTime lastUpdate) {
+		super();
+		this.film = film;
+		this.category = category;
+		this.lastUpdate = lastUpdate;
+	}
+
+	public Film getFilm() {
+		return film;
+	}
+
+	public void setFilm(Film film) {
+		this.film = film;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public LocalDateTime getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(LocalDateTime lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
 
 }

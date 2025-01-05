@@ -1,0 +1,95 @@
+package com.springboot.filmrentalstore.DTO;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
+import com.springboot.filmrentalstore.model.Address;
+
+class CustomerDTOTest {
+
+    @Test
+    void testGetterAndSetter() {
+        // Arrange
+        CustomerDTO customerDTO = new CustomerDTO();
+        Long expectedCustomerId = 1L;
+        String expectedFirstName = "John";
+        String expectedLastName = "Doe";
+        String expectedEmail = "john.doe@example.com";
+        boolean expectedActive = true;
+        Address expectedAddress = new Address(); // Mock Address object
+        StoreDTO expectedStore = new StoreDTO(); // Mock StoreDTO object
+        LocalDateTime expectedCreateDate = LocalDateTime.now().minusDays(1);
+        LocalDateTime expectedLastUpdate = LocalDateTime.now();
+
+        // Act
+        customerDTO.setCustomerId(expectedCustomerId);
+        customerDTO.setFirstName(expectedFirstName);
+        customerDTO.setLastName(expectedLastName);
+        customerDTO.setEmail(expectedEmail);
+        customerDTO.setActive(expectedActive);
+        customerDTO.setAddress(expectedAddress);
+        customerDTO.setStore(expectedStore);
+        customerDTO.setCreateDate(expectedCreateDate);
+        customerDTO.setLastUpdate(expectedLastUpdate);
+
+        // Assert
+        assertEquals(expectedCustomerId, customerDTO.getCustomerId());
+        assertEquals(expectedFirstName, customerDTO.getFirstName());
+        assertEquals(expectedLastName, customerDTO.getLastName());
+        assertEquals(expectedEmail, customerDTO.getEmail());
+        assertEquals(expectedActive, customerDTO.isActive());
+        assertEquals(expectedAddress, customerDTO.getAddress());
+        assertEquals(expectedStore, customerDTO.getStore());
+        assertEquals(expectedCreateDate, customerDTO.getCreateDate());
+        assertEquals(expectedLastUpdate, customerDTO.getLastUpdate());
+    }
+
+    @Test
+    void testParameterizedConstructor() {
+        // Arrange
+        Long expectedCustomerId = 1L;
+        String expectedFirstName = "John";
+        String expectedLastName = "Doe";
+        String expectedEmail = "john.doe@example.com";
+        boolean expectedActive = true;
+        Address expectedAddress = new Address(); // Mock Address object
+        StoreDTO expectedStore = new StoreDTO(); // Mock StoreDTO object
+        LocalDateTime expectedCreateDate = LocalDateTime.now().minusDays(1);
+        LocalDateTime expectedLastUpdate = LocalDateTime.now();
+
+        // Act
+        CustomerDTO customerDTO = new CustomerDTO(expectedCustomerId, expectedFirstName, expectedLastName, 
+                expectedEmail, expectedActive, expectedAddress, expectedStore, expectedCreateDate, expectedLastUpdate);
+
+        // Assert
+        assertEquals(expectedCustomerId, customerDTO.getCustomerId());
+        assertEquals(expectedFirstName, customerDTO.getFirstName());
+        assertEquals(expectedLastName, customerDTO.getLastName());
+        assertEquals(expectedEmail, customerDTO.getEmail());
+        assertEquals(expectedActive, customerDTO.isActive());
+        assertEquals(expectedAddress, customerDTO.getAddress());
+        assertEquals(expectedStore, customerDTO.getStore());
+        assertEquals(expectedCreateDate, customerDTO.getCreateDate());
+        assertEquals(expectedLastUpdate, customerDTO.getLastUpdate());
+    }
+
+    @Test
+    void testDefaultConstructor() {
+        // Act
+        CustomerDTO customerDTO = new CustomerDTO();
+
+        // Assert
+        assertNull(customerDTO.getCustomerId());
+        assertNull(customerDTO.getFirstName());
+        assertNull(customerDTO.getLastName());
+        assertNull(customerDTO.getEmail());
+        assertFalse(customerDTO.isActive());
+        assertNull(customerDTO.getAddress());
+        assertNull(customerDTO.getStore());
+        assertNull(customerDTO.getCreateDate());
+        assertNull(customerDTO.getLastUpdate());
+    }
+}

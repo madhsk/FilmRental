@@ -1,27 +1,60 @@
 package com.springboot.filmrentalstore.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.LocalDate;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "language")
-@Data
-@NoArgsConstructor
 public class Language {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "language_id", precision = 5, scale = 2)
-    private int languageId;
 
-    @Column(name="name",nullable = false, length = 20)
-    private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public int languageId;
 
-    @Column(name = "last_update", nullable = false)
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    private LocalDateTime lastUpdate;
+	@NotNull
+	public String name;
 
-    // Getters and Setters
+	@Column(name = "lastUpdate")
+	private LocalDate lastUpdate;
+
+	public Language() {
+		super();
+	}
+
+	public Language(int languageId, @NotNull String name, LocalDate lastUpdate) {
+		super();
+		this.languageId = languageId;
+		this.name = name;
+		this.lastUpdate = lastUpdate;
+	}
+
+	public int getLanguageId() {
+		return languageId;
+	}
+
+	public void setLanguageId(int languageId) {
+		this.languageId = languageId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public LocalDate getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(LocalDate lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
 }

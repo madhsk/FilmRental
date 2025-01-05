@@ -1,0 +1,30 @@
+package com.springboot.filmrentalstore.DTO;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
+public class StoreCreateDTO {
+
+	@NotNull(message = "Address ID Cannot Be Null")
+	@Valid
+	private Long addressId;
+	
+	private Long managerId;
+
+	public Long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
+	}
+
+	public Long getManagerId() {
+		return managerId;
+	}
+
+	public void setManagerId(Long managerId) {
+		this.managerId = managerId;
+	}
+	
+}

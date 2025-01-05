@@ -1,34 +1,73 @@
 package com.springboot.filmrentalstore.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
-import java.util.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "actor")
-@Data
-@NoArgsConstructor
 public class Actor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="actor_id")
-    private int actorId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long actorId;
 
-    @Column(name = "first_name", nullable = false, length = 45)
-    private String firstName;
+	@NotBlank(message = "First name cannot be empty")
+	private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 45)
-    private String lastName;
+	@NotBlank(message = "Last name cannot be empty")
+	private String lastName;
 
-    @Column(name = "last_update", nullable = false)
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    private LocalDateTime lastUpdate;
-    
-   
-    // Getters and Setters
+	@NotNull(message = "Last update timestamp cannot be null")
+	private LocalDateTime lastUpdate;
+
+	public Actor(Long actorId, @NotBlank(message = "First name cannot be empty") String firstName,
+			@NotBlank(message = "Last name cannot be empty") String lastName,
+			@NotNull(message = "Last update timestamp cannot be null") LocalDateTime lastUpdate) {
+		super();
+		this.actorId = actorId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.lastUpdate = lastUpdate;
+	}
+
+	public Actor() {
+
+	}
+
+	public Long getActorId() {
+		return actorId;
+	}
+
+	public void setActorId(Long actorId) {
+		this.actorId = actorId;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public LocalDateTime getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(LocalDateTime lastUpdate) {
+		this.lastUpdate = LocalDateTime.now();
+	}
+
 }

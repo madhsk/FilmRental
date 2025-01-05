@@ -1,32 +1,77 @@
 package com.springboot.filmrentalstore.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "inventory")
-@Data
-@NoArgsConstructor
 public class Inventory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "inventory_id")
-    private int inventoryId;
 
-    @ManyToOne
-    @JoinColumn(name = "film_id", nullable = false)
-    private Film film;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long inventoryId;
 
-    @ManyToOne
-    @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
+	@ManyToOne
+	@JoinColumn(name = "film_id")
+	@JsonManagedReference
+	private Film film;
 
-    @Column(name = "last_update", nullable = false)
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    private LocalDateTime lastUpdate;
+	@ManyToOne
+	@JoinColumn(name = "store_id")
+	@JsonManagedReference
+	private Store store;
 
-    // Getters and Setters
+	private LocalDateTime lastUpdate;
+
+	public Inventory() {
+		super();
+	}
+
+	public Inventory(Long inventoryId, Film film, Store store, LocalDateTime lastUpdate) {
+		super();
+		this.inventoryId = inventoryId;
+		this.film = film;
+		this.store = store;
+		this.lastUpdate = lastUpdate;
+	}
+
+	public Long getInventoryId() {
+		return inventoryId;
+	}
+
+	public void setInventoryId(Long inventoryId) {
+		this.inventoryId = inventoryId;
+	}
+
+	public Film getFilm() {
+		return film;
+	}
+
+	public void setFilm(Film film) {
+		this.film = film;
+	}
+
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+	public LocalDateTime getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(LocalDateTime lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
 }

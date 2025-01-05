@@ -1,46 +1,65 @@
 package com.springboot.filmrentalstore.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 @Entity
-@Table(name = "film_actor")
-@Data
-@NoArgsConstructor
+@IdClass(FilmActorId.class)
 public class FilmActor {
-	
-	
-	@EmbeddedId
-	private FilmActorId filmActorId;
-	
-	@Column(name ="last_update")
-	private LocalDateTime lastUpdate;
 
-}
-
-
-@Embeddable
-class FilmActorId {
-	
-
+	@Id
 	@ManyToOne
-	@JsonBackReference
-	@JoinColumn(name = "actor_id", referencedColumnName = "actor_id", nullable = false)
+	@JoinColumn(name = "actor_id")
+	@JsonIgnore
 	private Actor actor;
-	
+
+	@Id
 	@ManyToOne
-	@JsonBackReference
-	@JoinColumn(name = "film_id", referencedColumnName = "film_id", nullable = false)
+	@JoinColumn(name = "film_id")
+	@JsonIgnore
 	private Film film;
 
+	private LocalDateTime lastUpdate;
+
+	public FilmActor(Film mockFilm, Actor mockActor, LocalDateTime now) {
+		this.film = mockFilm;
+		this.actor = mockActor;
+		this.lastUpdate = now;
+	}
+
+	public Actor getActor() {
+		return actor;
+	}
+
+	public void setActor(Actor actor) {
+		this.actor = actor;
+	}
+
+	public Film getFilm() {
+		return film;
+	}
+
+	public void setFilm(Film film) {
+		this.film = film;
+	}
+
+	public LocalDateTime getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(LocalDateTime lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public FilmActor() {
+		super();
+	}
+
 }
-
-

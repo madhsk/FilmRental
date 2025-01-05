@@ -1,28 +1,58 @@
 package com.springboot.filmrentalstore.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Data;
+
 @Entity
-@Table(name = "category")
 @Data
-@NoArgsConstructor
 public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="category_id",nullable = false)
-    private int categoryId;
 
-    @Column(name="name",nullable = false, length = 25)
-    private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long category_id;
 
-    @Column(name = "last_update", nullable = false)
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    private LocalDateTime lastUpdate;
+	private String name;
 
-    // Getters and Setters
-    
+	private LocalDateTime last_update;
+
+	public Category() {
+		super();
+	}
+
+	public Category(long category_id, String name, LocalDateTime last_update) {
+		super();
+		this.category_id = category_id;
+		this.name = name;
+		this.last_update = last_update;
+	}
+
+	public long getCategory_id() {
+		return category_id;
+	}
+
+	public void setCategory_id(long category_id) {
+		this.category_id = category_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public LocalDateTime getLast_update() {
+		return last_update;
+	}
+
+	public void setLast_update(LocalDateTime last_update) {
+		this.last_update = last_update;
+	}
+
 }

@@ -1,0 +1,45 @@
+package com.springboot.filmrentalstore.DTO;
+
+import java.time.LocalDateTime;
+
+import com.springboot.filmrentalstore.model.Address;
+import com.springboot.filmrentalstore.model.Staff;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
+public class StoreCreateDTO {
+
+	@NotNull(message = "Address ID Cannot Be Null")
+	@Valid
+	private Address addressId;
+	
+	private Staff managerId;
+	
+	private LocalDateTime lastUpdate;
+
+	public Address getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Address addressId) {
+		this.addressId = addressId;
+	}
+
+	public Staff getManagerId() {
+		return managerId;
+	}
+
+	public void setManagerId(Staff managerId) {
+		this.managerId = managerId;
+	}
+
+	public LocalDateTime getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(LocalDateTime lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+	
+}

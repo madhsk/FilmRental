@@ -1,40 +1,130 @@
 package com.springboot.filmrentalstore.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
+
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "address")
-@Data
-@NoArgsConstructor
 public class Address {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="address_id", nullable = false, length = 50)
-    private int addressId;
 
-    @Column(name="address",nullable = false, length = 50)
-    private String address;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long addressId;
 
-    @Column(name = "address2", length = 50)
-    private String address2;
+	private String address;
+	private String address2;
+	private String district;
 
-    @Column(name="district",nullable = false, length = 20)
-    private String district;
+	@ManyToOne
+//	@JsonManagedReference
+	@JoinColumn(name = "city_id")
+	private City city;
 
-    @ManyToOne
-    @JoinColumn(name = "city_id", nullable = false)
-    private City city;
+	private String postalCode;
+	private String phone;
+	private LocalDateTime lastUpdate;
+	
+	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Store> stores;
 
-    @Column(name = "postal_code", length = 10)
-    private String postalCode;
+	public Address() {
+		super();
+	}
 
-    @Column(nullable = false, length = 20)
-    private String phone;
+	public Address(Long addressId, String address, String district, City city, String postalCode, String phone,
+			LocalDateTime lastUpdate) {
+		super();
+		this.addressId = addressId;
+		this.address = address;
+		this.district = district;
+		this.city = city;
+		this.postalCode = postalCode;
+		this.phone = phone;
+		this.lastUpdate = lastUpdate;
+	}
 
-    @Column(name = "last_update", nullable = false)
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    private LocalDateTime lastUpdate;
+	public Long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public LocalDateTime getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(LocalDateTime lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public List<Store> getStores() {
+		return stores;
+	}
+
+	public void setStores(List<Store> stores) {
+		this.stores = stores;
+	}
+
 }

@@ -1,45 +1,135 @@
 package com.springboot.filmrentalstore.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
-@Table(name = "customer")
-@Data
-@NoArgsConstructor
 public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="customer_id",nullable = false)
-    private int customerId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long customerId;
+	@ManyToOne
+	@JoinColumn(name = "store_id")
+	private Store store;
 
-    @Column(name = "store_id", nullable = false)
-    private int storeId;
+	private String firstName;
+	private String lastName;
+	private String email;
+	@ManyToOne
+	@JoinColumn(name = "address_id")
+	private Address address;
+	private boolean active;
 
-    @Column(name="first_name", nullable = false, length = 45)
-    private String firstName;
+	private LocalDateTime createDate;
+	private LocalDateTime lastUpdate;
+	
+	@OneToMany(mappedBy = "customer")
+	@JsonIgnore
+	private List<Payment> payments;
+	
+	public List<Payment> getPayments() {
+		return payments;
+	}
 
-    @Column(name="last_name",nullable = false, length = 45)
-    private String lastName;
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
+	}
 
-    @Column(name="email",length = 50)
-    private String email;
+	public Customer() {
+		super();
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "address_id", nullable = false)
-    private Address address; 
+	public Customer(Long customerId, Store store, String firstName, String lastName, String email, Address address,
+			boolean active, LocalDateTime createDate, LocalDateTime lastUpdate) {
+		super();
+		this.customerId = customerId;
+		this.store = store;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.active = active;
+		this.createDate = createDate;
+		this.lastUpdate = lastUpdate;
+	}
 
-    @Column(name="active",nullable = false)
-    private Boolean active;
+	public Long getCustomerId() {
+		return customerId;
+	}
 
-    @Column(name = "create_date", nullable = false)
-    private Date createDate;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
 
-    @Column(name = "last_update")
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    private LocalDateTime lastUpdate;
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public LocalDateTime getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(LocalDateTime createDate) {
+		this.createDate = createDate;
+	}
+
+	public LocalDateTime getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(LocalDateTime lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
 }
